@@ -2,7 +2,7 @@
 #include <opencv2/opencv.hpp>
 #include <NvInfer.h>
 #include <cuda_runtime_api.h>
-#include "Detector/yoloPlugins.h"
+#include "yoloPlugins.h"
 #include <fstream>
 #include <chrono>
 
@@ -155,7 +155,7 @@ DetectionInfo pre_process(cv::Mat& image)
 int main()
 {
     
-   // Detector detector("Detector/Engines/yolov3-tiny.engine");
+    Detector detector("yolov3-tiny.engine");
     cv::VideoCapture camera("nvarguscamerasrc ! video/x-raw(memory:NVMM), width=1280, height=720, format=NV12, framerate=(fraction)30/1 ! nvvidconv flip-method=0 ! video/x-raw, width=1280, height=720, format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink", cv::CAP_GSTREAMER);
 
     std::ifstream stream("Detector/Engines/yolov3-tiny.engine", std::ios::binary);
