@@ -9,6 +9,8 @@
  *
  */
 
+// you can find this file in /opt/nvidia/deepstream/deepstream-6.0/sources/objectDetector_Yolo/nvdsinfer_custom_impl_Yolo
+
 #include <cuda.h>
 #include <cuda_runtime.h>
 #include <stdint.h>
@@ -30,11 +32,6 @@ __global__ void gpuYoloLayerV3(const float* input, float* output, const uint gri
     }
     const int numGridCells = gridSize * gridSize;
     const int bbindex = y_id * gridSize + x_id;
-   // if (threadIdx.x != x_id && gridSize!=26) printf("nope. wrong assumption\n");
-  //  if (!(z_id >=0 && z_id < 3)) printf("Z is not in the assumed range\n");
-   // printf("threadIdx == x_id --> %d\n", threadIdx.x == x_id);
-   // if (gridSize==13) printf("x_id: %d, y_d: %d\n", x_id, y_id);
-
     output[bbindex + numGridCells * (z_id * (5 + numOutputClasses) + 0)]
         = sigmoidGPU(input[bbindex + numGridCells * (z_id * (5 + numOutputClasses) + 0)]); // bbox x
 
@@ -65,7 +62,6 @@ cudaError_t cudaYoloLayerV3(const void* input, void* output, const uint& batchSi
                             const uint& numOutputClasses, const uint& numBBoxes,
                             uint64_t outputSize, cudaStream_t stream)
 {
-   // printf("gridSize: %d\nnumBBoxes: %d\n", gridSize, numBBoxes);
     dim3 threads_per_block(16, 16, 4);
     dim3 number_of_blocks((gridSize / threads_per_block.x) + 1,
                           (gridSize / threads_per_block.y) + 1,
