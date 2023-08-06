@@ -20,6 +20,8 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
+// you can find this file in /opt/nvidia/deepstream/deepstream-6.0/sources/objectDetector_Yolo/nvdsinfer_custom_impl_Yolo
+
 #include "yoloPlugins.h"
 #include "NvInferPlugin.h"
 #include <cassert>
