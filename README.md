@@ -1,5 +1,4 @@
-# YOLO_TRT_CUDA
-YOLO with CUDA on the Jetson Nano!
+YOLO with CUDA on the Jetson Nano.
 
 Compile the program: sh compile.sh
 
